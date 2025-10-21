@@ -1,54 +1,115 @@
-# Backend Wizards — Stage 0: Dynamic Profile Endpoint
+# 🧙‍♂️ Backend Wizards — Stage 0 Task  
+**Build a Dynamic Profile Endpoint**
 
-This repository contains a Node.js/Express API that implements the Stage 0 task:
-A `GET /me` endpoint returning your profile plus a dynamic cat fact from `https://catfact.ninja/fact`.
+This project implements a simple RESTful API endpoint `/me` that returns your profile information and a dynamic cat fact fetched from the public [Cat Facts API](https://catfact.ninja/fact).
 
-## Features
-- `GET /me` returns JSON:
-```json
-{
-  "status": "success",
-  "user": { "email": "<your email>", "name": "<your full name>", "stack": "<your backend stack>" },
-  "timestamp": "<UTC ISO 8601>",
-  "fact": "<cat fact or fallback>"
-}
+---
+
+## 🚀 Features
+- GET `/me` returns profile information in the required JSON structure  
+- Fetches a **new cat fact** dynamically on each request  
+- Returns **current UTC timestamp** in ISO 8601 format  
+- Handles external API failures gracefully with a **fallback fact**  
+- Includes **logging**, **CORS**, and **environment variable** configuration  
 
 
-Requirements
+---
 
-Node.js 18+ recommended
+## 🧩 Technologies Used
+- **Node.js**
+- **Express.js**
+- **Axios** (for external API requests)
+- **dotenv**
+- **CORS**
+- **Nodemon** (for development)
 
-npm
+---
 
-Setup (local)
+## ⚙️ Installation & Setup
 
-1. Clone repo
-
+### 1️⃣ Clone Repository
+```bash
 git clone https://github.com/Ekemiben/HNG-week-one-25
-cd backend-wizards-stage0
+cd week-one
 
-2. Install dependencies
-npm install
+2️⃣ Install Dependencies
+    npm install
 
-3. Copy .env.example to .env and edit values:
+3️⃣ Configure Environment
+    Create a .env file in the project root (copy from .env.example)
+    :
 PORT=3000
 CATFACT_TIMEOUT_MS=3000
 USER_EMAIL=ekemiben.4@gmail.com
 USER_NAME=Ekemini Sunday Ben
 USER_STACK=Node.js/Express
 
-4. Start the server
-npm run dev
+4️⃣ Start the Server
+  npm start
 
-5. Test the endpoint
-curl -i http://localhost:3000/me
+🧠 API Endpoint Documentation
+GET /me
 
-A correct response will be 200 OK with Content-Type: application/json and the JSON payload described above.
+URL: /me
+Method: GET
+Content-Type: application/json
+Description: Returns your profile details, the current UTC timestamp, and a dynamic cat fact.
 
-Notes
+✅ Successful Response — 200 OK
 
-External request timeout (CATFACT_TIMEOUT_MS) defaults to 3000 ms. Increase if your environment needs it.
+{
+  "status": "success",
+  "user": {
+    "email": "ekemiben.4@gmail.com",
+    "name": "Ekemini Sunday Ben",
+    "stack": "Node.js/Express"
+  },
+  "timestamp": "2025-10-21T12:34:56.789Z",
+  "fact": "A group of cats is called a clowder."
+}
+🐾 Fallback Response (if Cat Facts API fails)
+{
+  "status": "success",
+  "user": {
+    "email": "ekemiben.4@gmail.com.com",
+    "name": "Ekemini Sunday Ben",
+    "stack": "Node.js/Express"
+  },
+  "timestamp": "2025-10-21T12:34:56.789Z",
+  "fact": "Could not fetch a cat fact at this time — but cats are awesome!"
+}
 
-Current behavior: if the Cat Facts API call fails, we return a fallback fact but still a 200 with the same JSON shape. If you prefer, change to return 502 Bad Gateway.
+🧾 Acceptance Criteria Checklist ✅
 
-Consider adding rate limiting if you deploy publicly.
+ GET /me endpoint accessible and returns 200 OK
+
+ Response JSON strictly follows the required schema
+
+ Content-Type: application/json header set
+
+ timestamp updates dynamically in UTC ISO 8601 format
+
+ fact fetched live from Cat Facts API (not cached)
+
+ Graceful handling if external API fails
+
+ Proper code structure, logging, and CORS
+
+ Works on any host (Railway, Heroku, AWS, PXXL App, etc.)
+
+ 
+
+🧪 Testing
+
+Run locally:
+
+ http://localhost:3000/me
+
+
+Expected output:
+
+HTTP 200 OK
+
+Header: Content-Type: application/json
+
+Body matches the specified JSON format
