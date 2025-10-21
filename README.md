@@ -113,3 +113,30 @@ HTTP 200 OK
 Header: Content-Type: application/json
 
 Body matches the specified JSON format
+
+🧑‍💻 Example Local Output
+$ curl http://localhost:3000/me
+{
+  "status":"success",
+  "user":{
+    "email":"ekemiben.4@gmail.com",
+    "name":"Ekemini Sunday Ben",
+    "stack":"Node.js/Express"
+  },
+  "timestamp":"2025-10-21T09:30:45.123Z",
+  "fact":"Cats sleep for 70% of their lives."
+}
+
+
+🪄 Author
+
+Name: Ekemini Sunday Ben
+Email: ekemiben.4@gmail.com
+
+Stack: Node.js / Express
+GitHub: https://github.com/Ekemiben/HNG-week-one-25
+
+💡 License
+
+This project is released under the MIT License
+ — feel free to use and modify for educational purposes.
